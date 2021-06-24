@@ -12,7 +12,7 @@ describe("parseAuthnrAttestationResponse (none)", function () {
 	it("correctly parses 'none' format", function () {
 		var ret = parser.parseAuthnrAttestationResponse(h.lib.makeCredentialAttestationNoneResponse);
 		assert.instanceOf(ret, Map);
-		assert.strictEqual(ret.size, 12);
+		assert.strictEqual(ret.size, 13);
 		// attStmt
 		// var attStmt = ret.get("attStmt");
 		// assert.isObject(attStmt);

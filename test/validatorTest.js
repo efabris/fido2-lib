@@ -684,6 +684,14 @@ describe("attestation validation", function () {
 		});
 	});
 
+	describe("validateExtensionData", function () {
+		it("returns true on validation", async function () {
+			var ret = await attResp.validateExtensionData();
+			assert.isTrue(ret);
+			assert.isTrue(attResp.audit.journal.has("extensionData"));
+		});
+	});
+
 	describe("validateTokenBinding", function () {
 		it("returns true if tokenBinding is undefined", async function () {
 			var ret = await attResp.validateTokenBinding();
@@ -766,6 +774,7 @@ describe("attestation validation", function () {
 			await attResp.validateAaguid();
 			await attResp.validateCredId();
 			await attResp.validatePublicKey();
+			await attResp.validateExtensionData();
 			await attResp.validateFlags();
 			await attResp.validateInitialCounter();
 

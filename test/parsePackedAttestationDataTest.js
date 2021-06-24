@@ -18,7 +18,7 @@ describe("parseAuthnrAttestationResponse (packed)", function () {
 	var ret = parser.parseAuthnrAttestationResponse(h.lib.makeCredentialAttestationPackedResponse);
 	it("parser returns Map with correct size", function () {
 		assert.instanceOf(ret, Map);
-		assert.strictEqual(ret.size, 16);
+		assert.strictEqual(ret.size, 17);
 	});
 
 	it("is 'packed' fmt", function () {

@@ -12,7 +12,7 @@ describe("parseAuthnrAttestationResponse (fido-u2f)", function () {
 	var ret = parser.parseAuthnrAttestationResponse(h.lib.makeCredentialAttestationU2fResponse);
 	it("parser returns Map with correct size", function () {
 		assert.instanceOf(ret, Map);
-		assert.strictEqual(ret.size, 15);
+		assert.strictEqual(ret.size, 16);
 	});
 
 	it("parses fmt", function () {
@@ -194,6 +194,6 @@ describe("parseAuthnrAttestationResponse (fido-u2f Hypersecu)", function () {
 	it("can parse", function () {
 		var ret = parser.parseAuthnrAttestationResponse(h.lib.makeCredentialAttestationHypersecuU2fResponse);
 		assert.instanceOf(ret, Map);
-		assert.strictEqual(ret.size, 15);
+		assert.strictEqual(ret.size, 16);
 	});
 });

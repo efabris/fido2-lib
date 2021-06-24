@@ -8,15 +8,15 @@ const {
 	arrayBufferEquals,
 } = h.functions;
 
-describe("parseAuthnrAssertionResponse", function() {
-	it("parser is object", function() {
+describe("parseAuthnrAssertionResponse", function () {
+	it("parser is object", function () {
 		assert.isObject(parser);
 	});
 
-	it("parses assertion correctly", function() {
+	it("parses assertion correctly", function () {
 		var ret = parser.parseAuthnrAssertionResponse(h.lib.assertionResponse);
 		assert.instanceOf(ret, Map);
-		assert.strictEqual(ret.size, 6);
+		assert.strictEqual(ret.size, 13);
 		// rpid
 		var rpIdHash = ret.get("rpIdHash");
 		assert.instanceOf(rpIdHash, ArrayBuffer);
@@ -62,12 +62,12 @@ describe("parseAuthnrAssertionResponse", function() {
 
 const crypto = require("crypto");
 
-describe("validate signature", function() {
+describe("validate signature", function () {
 	function abToBuf(ab) {
 		return Buffer.from(new Uint8Array(ab));
 	}
 
-	it("works", function() {
+	it("works", function () {
 		var sig = h.lib.assertionResponse.response.signature;
 		var pk = h.lib.assnPublicKey;
 		var authnrData = h.lib.assertionResponse.response.authenticatorData;

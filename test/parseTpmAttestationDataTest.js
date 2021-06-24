@@ -23,7 +23,7 @@ describe("parseAuthnrAttestationResponse (tpm)", function () {
 
 	it("parser returns Map with correct size", function () {
 		assert.instanceOf(ret, Map);
-		assert.strictEqual(ret.size, 19);
+		assert.strictEqual(ret.size, 20);
 	});
 
 	it("parses fmt", function () {
