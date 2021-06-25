@@ -2,11 +2,30 @@
 
 const parser = require("../lib/parser");
 var assert = require("chai").assert;
+var expect = require("chai").expect;
 const h = require("fido2-helpers");
+
+const { parseFn } = require("../lib/attestations/none");
 
 describe("parseAuthnrAttestationResponse (none)", function () {
 	it("parser is object", function () {
 		assert.isObject(parser);
+	});
+
+	describe("noneParseFn", function () {
+		it("returns true if attStmt has not keys", async function () {
+			var ret = parser.parseAuthnrAttestationResponse(h.lib.makeCredentialAttestationNoneResponse);
+			var attStmt = ret.get("attStmt");
+			var parsed = parseFn(attStmt);
+			assert.instanceOf(parsed, Map);
+		});
+
+		it("throws if attStmt has keys", function () {
+			var ret = parser.parseAuthnrAttestationResponse(h.lib.makeCredentialAttestationNoneResponse);
+			var attStmt = ret.get("attStmt");
+			attStmt = (attStmt == undefined || Object.keys(attStmt).length == 0 ? { test: 1 } : attStmt);
+			expect(function noneParseFn() { parseFn(attStmt); }).to.throw(Error, "'none' attestation format: attStmt had fields");
+		});
 	});
 
 	it("correctly parses 'none' format", function () {
