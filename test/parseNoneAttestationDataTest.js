@@ -4,6 +4,7 @@ const parser = require("../lib/parser");
 var assert = require("chai").assert;
 var expect = require("chai").expect;
 const h = require("fido2-helpers");
+const noneParseFn = require("../lib/attestations/none").parseFn;
 
 var runs = [
 	{ functionName: "parseAuthnrAttestationResponse" },
@@ -142,5 +143,12 @@ runs.forEach(function(run) {
 				"-----END PUBLIC KEY-----\n";
 			assert.strictEqual(credentialPublicKeyPem, expectedPem);
 		});
+	});
+});
+
+describe("parseFn (none)", function() {
+	it("throws if attStmn has fields", function() {
+		var attStmt = {test: 1};
+		assert.throws(() => { noneParseFn(attStmt); }, Error, "'none' attestation format: attStmt had fields");
 	});
 });
