@@ -56,7 +56,7 @@ declare module "fido2-lib" {
     pubKeyCredParams: Array<{ type: "public-key"; alg: number }>;
     timeout?: number;
     attestation?: Attestation;
-    authenticatorSelectionCriteria?: AuthenticatorSelectionCriteria;
+    authenticatorSelection?: AuthenticatorSelectionCriteria;
     rawChallenge?: ArrayBuffer;
     extensions?: any;
   }
