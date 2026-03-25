@@ -1,22 +1,22 @@
 /// <reference types="node" />
 
-declare module "fido2-lib" {
+declare module "@efabris/fido2-lib" {
   class Fido2Lib {
     constructor(opts?: Fido2LibOptions);
 
     attestationOptions(
-      opts?: AttestationOptions
+      opts?: AttestationOptions,
     ): Promise<PublicKeyCredentialCreationOptions>;
     attestationResult(
       res: AttestationResult,
-      expected: ExpectedAttestationResult
+      expected: ExpectedAttestationResult,
     ): Promise<Fido2AttestationResult>;
     assertionOptions(
-      opts?: AssertionOptions
+      opts?: AssertionOptions,
     ): Promise<PublicKeyCredentialRequestOptions>;
     assertionResult(
       res: AssertionResult,
-      expected: ExpectedAssertionResult
+      expected: ExpectedAssertionResult,
     ): Promise<Fido2AssertionResult>;
   }
 

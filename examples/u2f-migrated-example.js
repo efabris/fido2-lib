@@ -1,5 +1,5 @@
-const { Fido2Lib } = require("fido2-lib");
-const { coerceToArrayBuffer, coerceToBase64Url } = require("fido2-lib/lib/utils");
+const { Fido2Lib } = require("@efabris/fido2-lib");
+const { coerceToArrayBuffer, coerceToBase64Url } = require("@efabris/fido2-lib/lib/utils");
 
 // STEP 1: Add the extension for app id like specified in https://developers.yubico.com/WebAuthn/WebAuthn_Developer_Guide/Migrating_from_U2F.html
 const optionGeneratorFn = (extName, type, value) => value;
