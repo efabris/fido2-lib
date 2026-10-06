@@ -16,9 +16,9 @@ describe("Fido2Lib extensions", function() {
 	it("exist", function() {
 		assert.isFunction(Fido2Lib.addExtension);
 		assert.isFunction(Fido2Lib.deleteAllExtensions);
-		assert.isFunction(Fido2Lib.parseExtensionResult);
-		assert.isFunction(Fido2Lib.validateExtensionResult);
 		var mc = new Fido2Lib();
+		assert.isFunction(mc.parseExtensionResult);
+		assert.isFunction(mc.validateExtensionResult);
 		assert.isFunction(mc.generateExtensionOptions);
 		assert.isFunction(mc.enableExtension);
 		assert.isFunction(mc.disableExtension);
