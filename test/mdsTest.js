@@ -70,7 +70,7 @@ describe("MdsCollection", function() {
 		it("rejects if TOC is junk string", function() {
 			// bad toc
 			var toc = "sL39APyTmisrjh11vghaqNfuruLQmCfR0c1ryKtaQ81jkEhNa5u9xLTnkibvXC9YpzBLFwWEZ3k9CR_sxzm_pWYbBOtKxeZu9z2GT8b6QW4iQvRlyumCT3oENx_8401r";
-			return assert.isRejected(mc.addToc(toc), Error, "could not parse and validate MDS TOC: Unexpected token � in JSON at position 0");
+			return assert.isRejected(mc.addToc(toc), Error, "could not parse and validate MDS TOC: Invalid Token or Protected Header formatting");
 		});
 
 		it("rejects if TOC header is missing alg", function() {
@@ -86,7 +86,7 @@ describe("MdsCollection", function() {
 			var jwtBody = "sL39APyTmisrjh11vghaqNfuruLQmCfR0c1ryKtaQ81jkEhNa5u9xLTnkibvXC9YpzBLFwWEZ3k9CR_sxzm_pWYbBOtKxeZu9z2GT8b6QW4iQvRlyumCT3oENx_8401r";
 			var jwtSig = "sL39APyTmisrjh11vghaqNfuruLQmCfR0c1ryKtaQ81jkEhNa5u9xLTnkibvXC9YpzBLFwWEZ3k9CR_sxzm_pWYbBOtKxeZu9z2GT8b6QW4iQvRlyumCT3oENx_8401r";
 			var toc = jwtHeader + "." + jwtBody + "." + jwtSig;
-			return assert.isRejected(mc.addToc(toc), Error, "could not parse and validate MDS TOC: Algorithm not allowed: undefined");
+			return assert.isRejected(mc.addToc(toc), Error, "could not parse and validate MDS TOC: error parsing ASN.1");
 		});
 
 		it("rejects if TOC header is missing typ", function() {
@@ -102,7 +102,7 @@ describe("MdsCollection", function() {
 			var jwtBody = "sL39APyTmisrjh11vghaqNfuruLQmCfR0c1ryKtaQ81jkEhNa5u9xLTnkibvXC9YpzBLFwWEZ3k9CR_sxzm_pWYbBOtKxeZu9z2GT8b6QW4iQvRlyumCT3oENx_8401r";
 			var jwtSig = "sL39APyTmisrjh11vghaqNfuruLQmCfR0c1ryKtaQ81jkEhNa5u9xLTnkibvXC9YpzBLFwWEZ3k9CR_sxzm_pWYbBOtKxeZu9z2GT8b6QW4iQvRlyumCT3oENx_8401r";
 			var toc = jwtHeader + "." + jwtBody + "." + jwtSig;
-			return assert.isRejected(mc.addToc(toc), Error, "could not parse and validate MDS TOC: no key found");
+			return assert.isRejected(mc.addToc(toc), Error, "could not parse and validate MDS TOC: error parsing ASN.1");
 		});
 
 		it("rejects if TOC header x5c only has one entry", function() {
@@ -118,7 +118,7 @@ describe("MdsCollection", function() {
 			var jwtBody = "sL39APyTmisrjh11vghaqNfuruLQmCfR0c1ryKtaQ81jkEhNa5u9xLTnkibvXC9YpzBLFwWEZ3k9CR_sxzm_pWYbBOtKxeZu9z2GT8b6QW4iQvRlyumCT3oENx_8401r";
 			var jwtSig = "sL39APyTmisrjh11vghaqNfuruLQmCfR0c1ryKtaQ81jkEhNa5u9xLTnkibvXC9YpzBLFwWEZ3k9CR_sxzm_pWYbBOtKxeZu9z2GT8b6QW4iQvRlyumCT3oENx_8401r";
 			var toc = jwtHeader + "." + jwtBody + "." + jwtSig;
-			return assert.isRejected(mc.addToc(toc), Error, "could not parse and validate MDS TOC: no key found");
+			return assert.isRejected(mc.addToc(toc), Error, "could not parse and validate MDS TOC: error parsing ASN.1");
 		});
 
 		it("rejects if TOC header x5c is missing", function() {
@@ -134,7 +134,7 @@ describe("MdsCollection", function() {
 			var jwtBody = "sL39APyTmisrjh11vghaqNfuruLQmCfR0c1ryKtaQ81jkEhNa5u9xLTnkibvXC9YpzBLFwWEZ3k9CR_sxzm_pWYbBOtKxeZu9z2GT8b6QW4iQvRlyumCT3oENx_8401r";
 			var jwtSig = "sL39APyTmisrjh11vghaqNfuruLQmCfR0c1ryKtaQ81jkEhNa5u9xLTnkibvXC9YpzBLFwWEZ3k9CR_sxzm_pWYbBOtKxeZu9z2GT8b6QW4iQvRlyumCT3oENx_8401r";
 			var toc = jwtHeader + "." + jwtBody + "." + jwtSig;
-			return assert.isRejected(mc.addToc(toc), Error, "could not parse and validate MDS TOC: no key found");
+			return assert.isRejected(mc.addToc(toc), Error, "could not parse and validate MDS TOC: x5c missing from header");
 		});
 
 		it("parses MDS1 TOC", async function() {
@@ -213,7 +213,7 @@ describe("MdsCollection", function() {
 			var tocParts = h.mds.mds2TocJwt.split(".");
 			tocParts[2] = tocParts[2].toUpperCase(); // mess up the signature
 			var toc = tocParts.join(".");
-			return assert.isRejected(mc.addToc(toc), Error, "could not parse and validate MDS TOC: no key found");
+			return assert.isRejected(mc.addToc(toc), Error, "could not parse and validate MDS TOC: signature verification failed");
 		});
 
 		it("throws on bad cert chain", function() {
